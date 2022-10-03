@@ -21,5 +21,5 @@ object SharedPreference {
 
     fun loadDataBoolean(key: String, activity: MainActivity) = activity.getPreferences(Context.MODE_PRIVATE).getBoolean(key, true)
 
-    fun loadDataString(key: String, activity: MainActivity) = activity.getPreferences(Context.MODE_PRIVATE).getString(key, "")
+    fun loadDataString(key: String, activity: MainActivity) = activity.getPreferences(Context.MODE_PRIVATE).getString(key, "0")
 }
