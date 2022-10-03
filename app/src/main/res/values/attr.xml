@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="colors">
+        <attr name="strokeColorCard" format="color"/>
+        <attr name="clearWhite" format="color"/>
+        <attr name="strokeColorCardConstructor" format="color"/>
+        <attr name="textColorLightGray" format="color"/>
+        <attr name="textColorLightGray2" format="color"/>
+        <attr name="buttonCreateConstructor" format="color"/>
+
+        <attr name="backgroundNoteBook" format="color"/>
+        <attr name="myGray" format="color"/>
+
+        <attr name="colorCardGreen" format="color"/>
+        <attr name="colorCardPink" format="color"/>
+        <attr name="colorCardYellow" format="color"/>
+        <attr name="colorCardWhite" format="color"/>
+        <attr name="colorCardGray" format="color"/>
+        <attr name="colorCardBlue" format="color"/>
+
+    </declare-styleable>
+
+</resources>

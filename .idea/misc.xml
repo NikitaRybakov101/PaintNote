@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable-v24/backgraund_bottom_sheet.xml" value="0.3085" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable-v24/corner_border.xml" value="0.4705" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable-v24/minus_icon.xml" value="0.4705" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable-v24/plus_icon.xml" value="0.273" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/corner_border.xml" value="0.4705" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/diary_icon.xml" value="0.3315" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/floating_button_background.xml" value="0.3925" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.459" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.479" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/ic_baseline_more_horiz_24.xml" value="0.459" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/ic_cook.xml" value="0.479" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/ic_favorite_empty.xml" value="0.479" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/ic_favorite_full.xml" value="0.479" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/ic_launcher_background.xml" value="0.479" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/ic_profile.xml" value="0.351" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/ic_settings.xml" value="0.318" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/ic_vectorcard.xml" value="0.459" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/minus_icon.xml" value="0.4705" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/drawable/plus_icon.xml" value="0.3315" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/canvas_fragment.xml" value="0.5" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/card_button_helper.xml" value="0.47071398033347583" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/card_foods.xml" value="0.5" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/card_notes.xml" value="0.5744791666666667" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/circle_layout.xml" value="0.2304638529043042" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/constructor_note.xml" value="0.33" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/diary_create_dialog.xml" value="0.2304638529043042" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/diary_item.xml" value="0.2304638529043042" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/diary_product_item.xml" value="0.2304638529043042" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/food_note_editor.xml" value="0.5" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/fragment_another.xml" value="0.5744791666666667" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/fragment_auth.xml" value="0.5" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/fragment_calorie_calculator.xml" value="0.445019404915912" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/fragment_collection_object.xml" value="0.2304638529043042" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/fragment_diary_item_detail.xml" value="0.371260199456029" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/fragment_favorite_recipes.xml" value="0.2304638529043042" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/fragment_notes.xml" value="0.5744791666666667" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/fragment_recipes.xml" value="0.32760416666666664" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/fragment_settings.xml" value="0.32760416666666664" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/helper_button_card.xml" value="0.47071398033347583" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/include_recipes_details.xml" value="0.2304638529043042" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/item_favorite_recipes.xml" value="0.5" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/item_recipes.xml" value="0.4715690466011116" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/item_recycler.xml" value="0.33" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/notebook_fragment.xml" value="0.5" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/paint_note_editor.xml" value="0.33" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/profile_fragment.xml" value="0.5" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/search_bar_layout.xml" value="0.2304638529043042" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/splash_screen_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/standart_note_editor.xml" value="0.33" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/type_mode_item_layout.xml" value="0.2304638529043042" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/water_layout.xml" value="0.5" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.5744791666666667" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2685" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

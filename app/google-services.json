@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "214549939704",
+    "project_id": "foodnote-38d9a",
+    "storage_bucket": "foodnote-38d9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214549939704:android:ec7d90dcf3e6b99313820d",
+        "android_client_info": {
+          "package_name": "com.example.foodnote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214549939704-onkl6lf8sf6r1ppreo1kjmpjkqalgp3s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGPRRNMUFix1F-oUjbhw_6dHI_VGYkyU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214549939704-onkl6lf8sf6r1ppreo1kjmpjkqalgp3s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

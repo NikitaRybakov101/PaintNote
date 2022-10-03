@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_root"
+    app:startDestination="@id/splashScreenFragment">
+
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="com.example.foodnote.ui.noteBook.mainFragmenNoteBook.NotesFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/notebook_fragment" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/anotherFragment"
+        android:name="com.example.foodnote.ui.profile.ProfileFragment"
+        android:label="fragment_second"
+        tools:layout="@layout/profile_fragment" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/calorieCalculatorFragment"
+        android:name="com.example.foodnote.ui.calorie_calculator_fragment.fragment.CalorieCalculatorFragment"
+        android:label="fragment_second"
+        tools:layout="@layout/fragment_calorie_calculator">
+    </fragment>
+
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.example.foodnote.ui.splash_screen_fragment.SplashScreenFragment"
+        android:label="SplashScreenFragment">
+
+        <action
+            android:id="@+id/action_splashScreenFragment_to_notesFragment"
+            app:destination="@id/notesFragment"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>
