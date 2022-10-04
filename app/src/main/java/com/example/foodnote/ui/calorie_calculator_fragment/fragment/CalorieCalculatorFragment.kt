@@ -62,10 +62,10 @@ class CalorieCalculatorFragment : BaseViewBindingFragment<FragmentCalorieCalcula
 
         saveButton.setOnClickListener {
 
-            val cal = editCal.text.toString().toInt()
-            val fat = editFat.text.toString().toInt()
-            val protein = editProtein.text.toString().toInt()
-            val water = editWater.text.toString().toInt()
+            val cal = editCal.text.toString().replace("","0").toInt()
+            val fat = editFat.text.toString().replace("","0").toInt()
+            val protein = editProtein.text.toString().replace("","0").toInt()
+            val water = editWater.text.toString().replace("","0").toInt()
 
             listNotes.add(NotesCalories(getString(R.string.notes_calories),cal,fat,protein,water))
             recyclerUpdate()
