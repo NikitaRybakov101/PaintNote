@@ -15,6 +15,7 @@ object CalculatorCalories {
         if (weight == null) weight = 0
         if (height == null) height = 0
         if (age == null) age = 0
+        if (weight == 0) return 0
 
         val calories = if (SharedPreference.loadDataBoolean(ProfileSettings.MALE, activity)) {
             (10 * weight) + (6.25f * height) - (5 * age) + 5
@@ -23,6 +24,32 @@ object CalculatorCalories {
         }
 
         return calories.toInt()
+    }
+
+    fun getMaxProtein(activity: MainActivity): Int {
+        var weight = SharedPreference.loadDataString(ProfileSettings.WEIGHT, activity)?.toInt()
+        if (weight == null) weight = 0
+        if (weight == 0) return 0
+
+        return (weight * 0.9f).toInt()
+    }
+
+    fun getMaxFats(activity: MainActivity): Int {
+        val fat = 100
+
+        var weight = SharedPreference.loadDataString(ProfileSettings.WEIGHT, activity)?.toInt()
+        if (weight == null) weight = 0
+        if (weight == 0) return 0
+
+        return fat
+    }
+
+    fun getMaxWater(activity: MainActivity): Int {
+        var weight = SharedPreference.loadDataString(ProfileSettings.WEIGHT, activity)?.toInt()
+        if (weight == null) weight = 0
+        if (weight == 0) return 0
+
+        return weight * 30
     }
 
 }

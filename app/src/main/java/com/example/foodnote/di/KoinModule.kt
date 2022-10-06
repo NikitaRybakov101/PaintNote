@@ -27,6 +27,9 @@ val applicationModule = module {
     single(named(DATA_BASE)) {
         get<DataBase>().dataBase()
     }
+    single(named(DATA_BASE_CALORIES)) {
+        get<DataBase>().getDataBaseNotesCalories()
+    }
 }
 
 val dataStoreModule = module {

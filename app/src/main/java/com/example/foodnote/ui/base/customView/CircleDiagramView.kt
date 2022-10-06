@@ -210,9 +210,15 @@ class CircleDiagramView @JvmOverloads constructor(context : Context, attrs : Att
         this.x2 = x2
         this.x3 = x3
 
-        length = (360f * ((x1 * 100) / maxCalories)) / 100f
-        length2 = (360f * ((x2 * 100) / maxFats)) / 100f
-        length3 = (360f * ((x3 * 100) / maxProtein)) / 100f
+        if(maxCalories != 0  && maxFats != 0 && maxProtein != 0) {
+            length = (360f * ((x1 * 100) / maxCalories)) / 100f
+            length2 = (360f * ((x2 * 100) / maxFats)) / 100f
+            length3 = (360f * ((x3 * 100) / maxProtein)) / 100f
+        } else {
+            length = 0f
+            length2 = 0f
+            length3 = 0f
+        }
     }
 
 }

@@ -116,6 +116,7 @@
     <string name="create_notes2">Create Notes</string>
     <string name="save_profile_eu">Save profile</string>
     <string name="notes_calories">Notes calories</string>
-    <string name="max_water">max water 2100</string>
+    <string name="max_water">max water</string>
     <string name="max_cal">max cal</string>
+    <string name="name_header_note">name header note:</string>
 </resources>

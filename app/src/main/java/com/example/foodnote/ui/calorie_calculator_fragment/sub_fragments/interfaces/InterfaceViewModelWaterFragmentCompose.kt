@@ -1,4 +1,4 @@
-package com.example.foodnote.ui.calorie_calculator_fragment.sub_fragments
+package com.example.foodnote.ui.calorie_calculator_fragment.sub_fragments.interfaces
 
 import androidx.lifecycle.MutableLiveData
 import com.example.foodnote.ui.noteBook.stateData.StateDataCompose
