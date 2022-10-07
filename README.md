@@ -24,3 +24,5 @@ Pet-проект приложение для создания удобных з�
         </td>     
     </tr>
 </table>   
+
+Ссылка для скачивания приложения [PaintNote.apk Google Диск](https://drive.google.com/file/d/1TNzwQp9V7Z-17HtOKkQgW9VRmy_gWV_H/view?usp=sharing)
