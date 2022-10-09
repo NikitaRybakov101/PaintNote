@@ -1,5 +1,5 @@
 # PaintNote
-Pet-проект приложение для создания удобных заметок. Стек используемых технологий Coroutines, Koin, Room, Compose, Navigation component
+Pet-проект приложение для создания удобных заметок. Стек используемых технологий Coroutines, Koin, Room, Compose, Navigation component. А так же использование Custom view
 
 Создание кастомных заметок с возможностью рисования
 <table>
