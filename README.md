@@ -5,7 +5,7 @@ Pet-проект приложение для создания удобных з�
 <table>
     <tr>
         <td>
-            <img src=https://i.postimg.cc/yNvnLGsn/notesGif.gif width="256"/>       
+            <img src=https://im.wampi.ru/2022/10/10/notes.gif width="256"/>       
         </td>
         <td>
             <img src=https://i.postimg.cc/ZqWFLxKy/paint-Note-Gif2.gif width="256"/>
