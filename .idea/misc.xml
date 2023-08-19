@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
@@ -57,6 +56,8 @@
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/layout/water_layout.xml" value="0.5" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.5744791666666667" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/FoodNote/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2685" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/PaintNote/app/src/main/res/layout/fragment_calorie_calculator.xml" value="0.4715690466011116" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/PaintNote/app/src/main/res/layout/item_recycler.xml" value="0.4715690466011116" />
       </map>
     </option>
   </component>
