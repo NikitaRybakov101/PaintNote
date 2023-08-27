@@ -10,9 +10,9 @@
     <string name="width">width =</string>
     <string name="create_note">Create Note</string>
     <string name="note">Note</string>
-    <string name="standard_notes">Standard notes</string>
+    <string name="standard_notes">Text note</string>
     <string name="food_notes">Food notes</string>
-    <string name="paint_notes">Paint notes</string>
+    <string name="paint_notes">Paint note</string>
     <string name="range_error">Range ERROR</string>
     <string name="nuber_format_error_message">NumberF format ERROR</string>
     <string name="empty_field_error_messange">Empty field ERROR</string>
@@ -25,7 +25,7 @@
     <string name="brash">Brash</string>
     <string name="not_permission">not permission</string>
     <string name="max_20">max 20</string>
-    <string name="save_image">save image</string>
+    <string name="save_image">Save</string>
     <string name="calculator">Калькулятор</string>
     <string name="recipes">Рецепты</string>
     <string name="settings">Настройки</string>
@@ -46,9 +46,9 @@
     <string name="saved_mess">Saved: </string>
     <string name="add_diary">Добавить +</string>
     <string name="anonimus_sign_in">Войти анонимно</string>
-    <string name="alert_dialog_header">Вы точно хотите удалить заметку?</string>
-    <string name="no">нет</string>
-    <string name="yes">да</string>
+    <string name="alert_dialog_header">Are you sure you want to delete the note?</string>
+    <string name="no">no</string>
+    <string name="yes">yes</string>
     <string name="list_foods">List foods</string>
     <string name="list_foods_hint">Введите по строчно название продуктов</string>
     <string name="list_foods_header">List Foods</string>
@@ -57,10 +57,10 @@
     <string name="general">General:</string>
     <string name="search">search</string>
     <string name="recipe_search">Recipe search</string>
-    <string name="color_selection">color selection</string>
+    <string name="color_selection">color piker</string>
     <string name="alpha">alpha</string>
     <string name="ok">OK</string>
-    <string name="clearCanvas_mess">Вы точно хотите очистить холст?</string>
+    <string name="clearCanvas_mess">Are you sure you want to clear the canvas?</string>
     <string name="weight_gm">вес гм\n</string>
     <string name="exit">выйти</string>
     <string name="type_name_product">Введите название продукта</string>
@@ -73,17 +73,6 @@
     <string name="create_notes">Создаение заметки</string>
     <string name="save">Сохранить</string>
     <string name="disabled">Отменить</string>
-    <string name="type_weight">Введите вес</string>
-    <string name="type_height">Введите рост</string>
-    <string name="male">М</string>
-    <string name="female">Ж</string>
-    <string name="select_meta">Ваша цель</string>
-    <string name="select_weight">Выберите вес</string>
-    <string name="select_height">Выберите рост</string>
-    <string-array name="type_modes">
-        <item>Похудеть</item>
-        <item>Набрать вес</item>
-    </string-array>
     <string name="pix_0">Pix 0</string>
     <string name="alpha_0">Alpha 0</string>
     <string name="alpha_string">Alpha</string>

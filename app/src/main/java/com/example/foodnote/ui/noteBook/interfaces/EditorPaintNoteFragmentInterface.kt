@@ -1,6 +1,8 @@
 package com.example.foodnote.ui.noteBook.interfaces
 
+import android.graphics.Bitmap
+
 interface EditorPaintNoteFragmentInterface {
-    fun loadImage(fileNameToSave : String)
-    fun getImageURL(): String
+    fun loadImage(_bitmap: Bitmap?)
+    fun getImageBitmap(): Bitmap?
 }

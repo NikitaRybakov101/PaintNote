@@ -16,57 +16,82 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/containerConstructor" />
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chipStandardNote"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearChip"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_16dp"
-        android:layout_marginBottom="12dp"
-        android:backgroundTint="?attr/clearWhite"
-        android:text="@string/standard_notes"
-        android:textSize="11sp"
-        app:chipStrokeColor="?attr/myGray"
-        app:chipStrokeWidth="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/containerCanvas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chipFoodNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_16dp"
-        android:layout_marginBottom="12dp"
-        android:backgroundTint="?attr/clearWhite"
-        android:text="@string/food_notes"
-        android:textSize="11sp"
-        app:chipStrokeColor="?attr/myGray"
-        app:chipStrokeWidth="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/chipStandardNote"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:layout_marginStart="28dp"
+            android:layout_weight="2"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:outlineSpotShadowColor="#0028FF"
+            android:text="@string/standard_notes"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:cardCornerRadius="100dp"
+            app:cardElevation="85dp"
+            app:chipBackgroundColor="@color/white">
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chipPaintNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:backgroundTint="?attr/clearWhite"
-        android:text="@string/paint_notes"
-        android:textSize="11sp"
-        app:chipStrokeColor="?attr/myGray"
-        app:chipStrokeWidth="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/chipFoodNote"
-        app:layout_constraintStart_toEndOf="@+id/chipStandardNote" />
+            <TextView
+                android:id="@+id/textNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Text note"
+                android:textSize="15sp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/chipPaintNote"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginVertical="12dp"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginEnd="28dp"
+            android:layout_weight="1.2"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:outlineSpotShadowColor="#E600FF"
+            android:text="@string/paint_notes"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:cardCornerRadius="100dp"
+            app:cardElevation="85dp"
+            app:chipBackgroundColor="@color/white">
+
+            <TextView
+                android:id="@+id/painNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Paint note"
+                android:textSize="15sp" />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_16dp"
+        android:layout_marginBottom="12dp"
         android:text="@string/add_note"
-        android:textColor="?attr/textColorLightGray2"
+        android:textColor="#E3E3E3"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/chipPaintNote"
+        app:layout_constraintBottom_toTopOf="@+id/linearChip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -85,14 +110,13 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/containerConstructor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="80dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="10dp"
         android:elevation="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearChip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/containerCanvas"
@@ -104,6 +128,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

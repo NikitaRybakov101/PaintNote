@@ -5,6 +5,8 @@ class NoteStandard(
     heightCard: Int,
     colorCard: Int,
     val string: String,
+    val font: String,
+    val fontSize: String,
     posX: Int,
     posY: Int,
     id: Int,
@@ -17,20 +19,6 @@ class NotePaint(
     heightCard: Int,
     colorCard: Int,
     val bitmapURL: String,
-    posX: Int,
-    posY: Int,
-    id: Int,
-    elevation: Float
-
-) : Note(widthCard, heightCard, colorCard, posX, posY, id, elevation)
-
-class NoteFood(
-    widthCard: Int,
-    heightCard: Int,
-    colorCard: Int,
-    val stringFoods : String,
-    val stringWeight : String,
-    val general : String,
     posX: Int,
     posY: Int,
     id: Int,

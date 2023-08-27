@@ -17,7 +17,7 @@ class ExampleNote(private val fragment: NotesFragment, private val context: Cont
 
 ////////////////------------------Example note --- Hard code----------------/////////////////////////
     private lateinit var nameFile : String
-    private fun getName() = "image244${Random(Const.SEED)}.png"
+    private fun getName() = "image244${Random(Const.SEED)}${java.util.Random().nextInt()}.png"
 
     fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String = getName()): File? {
         var file: File? = null
@@ -40,12 +40,11 @@ class ExampleNote(private val fragment: NotesFragment, private val context: Cont
             fos.flush()
             fos.close()
 
+            createExampleNote()
             file
         } catch (e: Exception) {
             e.printStackTrace()
             file
-        } finally {
-            createExampleNote()
         }
     }
 
@@ -54,21 +53,14 @@ class ExampleNote(private val fragment: NotesFragment, private val context: Cont
 
         val bitmapURL = nameFile
 
-        val stringFoods = "Milk\nApple\nOrange"
-        val stringWeight = "1300\n700\n430"
-        val general = "2430 gm"
-
         val height = ((55 * widthScreen) / 100) + convertDpToPixels(Const.CARD_NOTE_DP)
         val width = (42 * widthScreen) / 100
 
-        val noteStandard = NoteStandard(50, 40, Color.rgb(252, 252, 215 ), stringStandard,width + 20 + 40,height + 20 + 180,  51, Const.NOTES_ELEVATION)
+        val noteStandard = NoteStandard(50, 40, Color.rgb(252, 252, 215 ), stringStandard,"classic","18",width + 20 + 40,height - 90,  51, Const.NOTES_ELEVATION + 1)
         fragment.saveAndCreateDataNotesStandard(noteStandard)
 
-        val notePaint = NotePaint(75, 55, Color.WHITE, bitmapURL,40 ,180, 52, Const.NOTES_ELEVATION)
+        val notePaint = NotePaint(75, 55, Color.WHITE, bitmapURL,40 ,220, 52, Const.NOTES_ELEVATION)
         fragment.saveAndCreateDataNotesPaint(notePaint)
-
-        val noteFood = NoteFood(42, 60, Color.WHITE, stringFoods, stringWeight, general,40 ,height + 20 + 180, 53, Const.NOTES_ELEVATION)
-        fragment.saveAndCreateDataNotesFoods(noteFood)
     }
 
     private fun convertDpToPixels(dp: Int) = (dp * context.resources.displayMetrics.density).toInt()

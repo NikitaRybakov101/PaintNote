@@ -1,6 +1,5 @@
 package com.example.foodnote.ui.noteBook.stateData
 
-import com.example.foodnote.ui.noteBook.modelNotes.NoteFood
 import com.example.foodnote.ui.noteBook.modelNotes.NotePaint
 import com.example.foodnote.ui.noteBook.modelNotes.NoteStandard
 
@@ -14,7 +13,6 @@ sealed class StateDataNotes {
 
     data class SuccessNoteStandard(val listNote : ArrayList<NoteStandard>?) : StateDataNotes()
     data class SuccessNotePaint(val listNote : ArrayList<NotePaint>?) : StateDataNotes()
-    data class SuccessNoteFood(val listNote : ArrayList<NoteFood>?) : StateDataNotes()
 
     data class Loading(val loading : String)     : StateDataNotes()
     data class Error  (val error   : Throwable)  : StateDataNotes()

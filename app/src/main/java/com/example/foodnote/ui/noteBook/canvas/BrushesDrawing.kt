@@ -2,7 +2,13 @@ package com.example.foodnote.ui.noteBook.canvas
 
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.util.Log
+import kotlin.math.PI
+import kotlin.math.atan
+import kotlin.math.cos
 import kotlin.math.round
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 object BrushesDrawing {
 
@@ -13,59 +19,25 @@ object BrushesDrawing {
     }
 
     fun circleBrush(myCanvas : Canvas, xCurrent : Int, xTemp : Int, yTemp : Int, yCurrent : Int, paint : Paint, size :Int) {
-        val sizeBrush = size.toFloat()
+        val deltaY = yCurrent - yTemp.toDouble()
+        val deltaX = xCurrent - xTemp.toDouble()
 
-        val deltaY = ((yCurrent.toDouble() - yTemp.toDouble())/(xCurrent.toDouble() - xTemp.toDouble()))
-        if(xCurrent > xTemp) {
-            var tempY = round(deltaY * (xTemp - xTemp) + yTemp)
-
-            for (i in xTemp..xCurrent) {
-                val y = round(deltaY * (i - xTemp) + yTemp)
-                myCanvas.drawCircle(i.toFloat(), y.toFloat(),sizeBrush,paint)
-
-                if (y.toInt() > tempY.toInt() + 2) {
-                    for (j in tempY.toInt()..y.toInt()) {
-                        myCanvas.drawCircle(i.toFloat(), j.toFloat(),sizeBrush,paint)
-                    }
-                }
-                if (y.toInt() < tempY.toInt() - 2) {
-                    for (j in tempY.toInt() downTo y.toInt()) {
-                        myCanvas.drawCircle(i.toFloat(), j.toFloat(),sizeBrush,paint)
-                    }
-                }
-                tempY = y
-            }
+        val radian = if(deltaX != 0.0) {
+            val aTan = - atan((deltaY / deltaX))
+            if(deltaX > 0.0) { aTan } else { PI + aTan }
         } else {
-            var tempY = round(deltaY * (xTemp - xTemp) + yTemp)
-
-            for (i in xTemp downTo xCurrent) {
-                val y = round( deltaY * (i - xTemp) + yTemp)
-                myCanvas.drawCircle(i.toFloat(), y.toFloat(), sizeBrush, paint)
-
-                if (y.toInt() > tempY.toInt() + 2) {
-                    for (j in tempY.toInt()..y.toInt()) {
-                        myCanvas.drawCircle(i.toFloat(), j.toFloat(),sizeBrush,paint)
-                    }
-                }
-                if (y.toInt() < tempY.toInt() - 2) {
-                    for (j in tempY.toInt() downTo y.toInt()) {
-                        myCanvas.drawCircle(i.toFloat(), j.toFloat(),sizeBrush,paint)
-                    }
-                }
-                tempY = y
-            }
+            if(deltaY < 0.0) { PI / 2.0 } else { - PI / 2.0 }
         }
-        if(xCurrent == xTemp) {
-            if (yCurrent > yTemp + 2) {
-                for (j in yTemp..yCurrent) {
-                    myCanvas.drawCircle(xCurrent.toFloat(), j.toFloat(), sizeBrush, paint)
-                }
-            }
-            if (yCurrent < yTemp - 2) {
-                for (j in yTemp downTo yCurrent) {
-                    myCanvas.drawCircle(xCurrent.toFloat(), j.toFloat(), sizeBrush, paint)
-                }
-            }
+
+        val length = sqrt((deltaY * deltaY + deltaX * deltaX))
+        var lengthTemp = 0.0
+
+        while (lengthTemp <= length) {
+            val x = lengthTemp * cos(radian + PI) + xCurrent
+            val y = - lengthTemp * sin(radian + PI) + yCurrent
+
+            myCanvas.drawCircle(x.toFloat(), y.toFloat(), size.toFloat(), paint)
+            lengthTemp += 1
         }
     }
 

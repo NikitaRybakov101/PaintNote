@@ -13,6 +13,9 @@ data class EntitiesNotesStandard(
     @ColumnInfo(name = "colorCard")   val colorCard: Int,
     @ColumnInfo(name = "note")        val note: String,
 
+    @ColumnInfo(name = "font")        val font: String,
+    @ColumnInfo(name = "fontSize")        val fontSize: String,
+
     @ColumnInfo(name = "cardPositionX")    val cardPositionX: Int,
     @ColumnInfo(name = "cardPositionY")    val cardPositionY: Int,
     @ColumnInfo(name = "elevation")        val elevation: Int,

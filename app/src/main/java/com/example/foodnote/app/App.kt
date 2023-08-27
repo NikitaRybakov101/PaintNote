@@ -13,9 +13,7 @@ class App : Application() {
             modules(
                 listOf(
                     applicationModule,
-                    calorieCalculatorScreenModule,
                     noteBookModule,
-                    dataStoreModule,
                 )
             )
         }

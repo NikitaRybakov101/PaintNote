@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.foodnote.R
 import com.example.foodnote.databinding.SplashScreenFragmentBinding
@@ -15,8 +16,9 @@ class SplashScreenFragment : BaseViewBindingFragment<SplashScreenFragmentBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Handler(Looper.myLooper()!!).postDelayed({
+
+        Handler(Looper.getMainLooper()).postDelayed({
             findNavController().navigate(R.id.action_splashScreenFragment_to_notesFragment)
-        }, 6000)
+        }, 1800)
     }
 }

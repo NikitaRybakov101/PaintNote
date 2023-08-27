@@ -1,7 +1,10 @@
 package com.example.foodnote.ui.noteBook.mainFragmenNoteBook
 
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Environment
 import android.text.InputFilter
 import android.view.View
 import android.widget.EditText
@@ -9,6 +12,7 @@ import android.widget.Toast
 import com.example.foodnote.R
 import com.example.foodnote.databinding.ConstructorNoteBinding
 import com.example.foodnote.ui.baseViewBinding.BaseViewBindingFragment
+import com.example.foodnote.ui.noteBook.constNote.Const
 import com.example.foodnote.ui.noteBook.constNote.Const.DELAY_BUTTON
 import com.example.foodnote.ui.noteBook.constNote.Const.MAX_NOTE_SIZE
 import com.example.foodnote.ui.noteBook.constNote.Const.MIN_NOTE_SIZE
@@ -17,20 +21,19 @@ import com.example.foodnote.ui.noteBook.constNote.Const.RANDOM_ID
 import com.example.foodnote.ui.noteBook.constNote.Const.STROKE_WIDTH
 import com.example.foodnote.ui.noteBook.constNote.Const.STROKE_WIDTH_FOCUS
 import com.example.foodnote.ui.noteBook.constNote.ConstType
-import com.example.foodnote.ui.noteBook.editorNote.EditorFoodsNoteFragment
 import com.example.foodnote.ui.noteBook.editorNote.EditorPaintNoteFragment
 import com.example.foodnote.ui.noteBook.editorNote.EditorStandardNoteFragment
 import com.example.foodnote.ui.noteBook.interfaces.ConstructorFragmentInterface
 import com.example.foodnote.ui.noteBook.interfaces.NoteBookFragmentInterface
-import com.example.foodnote.ui.noteBook.modelNotes.NoteFood
 import com.example.foodnote.ui.noteBook.modelNotes.NotePaint
 import com.example.foodnote.ui.noteBook.modelNotes.NoteStandard
-import com.example.foodnote.ui.noteBook.stateData.StateData
-import com.example.foodnote.ui.noteBook.viewModel.ViewModelConstructorFragment
-import com.example.foodnote.utils.showToast
+import com.example.foodnote.utils.setOnTouchAlphaListener
 import kotlinx.coroutines.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 import java.util.*
+import kotlin.random.Random
 
 class ConstructorFragment : BaseViewBindingFragment<ConstructorNoteBinding>(ConstructorNoteBinding::inflate) , ConstructorFragmentInterface{
 
@@ -38,41 +41,22 @@ class ConstructorFragment : BaseViewBindingFragment<ConstructorNoteBinding>(Cons
 
     private lateinit var editorStandardNoteFragmentEditor: EditorStandardNoteFragment
     private lateinit var editorPaintNoteFragmentEditor: EditorPaintNoteFragment
-    private lateinit var editorFoodNoteFragmentEditor: EditorFoodsNoteFragment
     private var typeNote : ConstType = ConstType.STANDARD_TYPE
 
     private var colorCard = Color.WHITE
-    private var flag = true
+    private var flagBackBtn = true
+    private var flagCreateBtn = true
 
     private val scope = CoroutineScope(Dispatchers.IO)
-    private val viewModel : ViewModelConstructorFragment by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initViewModel()
-
         setEditorType()
 
-        chekButton()
-        chekColor()
+        checkButton()
+        checkColor()
         editTextFilter()
-    }
-
-    private fun initViewModel() { viewModel.getLiveData().observe(viewLifecycleOwner) { render(it) } }
-
-    private fun render(stateData: StateData) {
-        when(stateData) {
-            is StateData.Loading -> {
-
-            }
-            is StateData.Success -> {
-                stateData.data?.let { createFoodNote(it) }
-            }
-            is StateData.Error ->   {
-                context?.showToast(getString(R.string.network_error_mess))
-            }
-        }
     }
 
     private fun setEditorType() {
@@ -88,44 +72,54 @@ class ConstructorFragment : BaseViewBindingFragment<ConstructorNoteBinding>(Cons
                 childFragmentManager.beginTransaction().replace(R.id.containerEditNotes,fragment).commitNow()
             }
             ConstType.FOOD_TYPE ->     {
-                val fragment = EditorFoodsNoteFragment()
-                editorFoodNoteFragmentEditor = fragment
-                childFragmentManager.beginTransaction().replace(R.id.containerEditNotes,fragment).commitNow()
+
+
             }
             else -> {}
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun editTextFilter() {
         val filterArray = Array<InputFilter>(1) { InputFilter.LengthFilter(2) }
         binding.editWidth.filters = filterArray
         binding.editHeight.filters = filterArray
+
+        binding.editWidth.setText("50")
+        binding.editHeight.setText("50")
     }
 
-    fun setFlag(boolean: Boolean) {flag = boolean}
+    fun setFlag(boolean: Boolean) { }
 
-    private fun chekButton() = with(binding) {
+    private fun checkButton() = with(binding) {
         buttonCreate.setOnClickListener {
-            if(flag){
+            if(flagCreateBtn){
                 createNoteWidthHeight()
-                flag = false
-                timeOutButton()
+                flagCreateBtn = false
+                timeOutButtonCreate()
             }
         }
 
-        back.setOnClickListener {
-            if(flag){
+        back.setOnTouchAlphaListener {
+            if(flagBackBtn){
                 fragmentNoteBook.constructorFragmentClose()
-                flag = false
-                timeOutButton()
+                flagBackBtn = false
+                timeOutButtonBack()
             }
         }
     }
 
-    private fun timeOutButton(){
+    private fun timeOutButtonBack(){
         scope.launch {
             delay(DELAY_BUTTON)
-            flag = true
+            flagBackBtn = true
+        }
+    }
+
+    private fun timeOutButtonCreate(){
+        scope.launch {
+            delay(DELAY_BUTTON)
+            flagCreateBtn = true
         }
     }
 
@@ -156,7 +150,7 @@ class ConstructorFragment : BaseViewBindingFragment<ConstructorNoteBinding>(Cons
         return -1
     }
 
-    private fun chekColor() = with(binding){
+    private fun checkColor() = with(binding){
         val list = listOf(colorBlue,colorPink,colorGreen,colorYellow,colorGray,colorWhite)
 
         list.forEach { view ->
@@ -179,42 +173,68 @@ class ConstructorFragment : BaseViewBindingFragment<ConstructorNoteBinding>(Cons
     private fun createNote(height : Int, width : Int) {
         when (typeNote) {
             ConstType.STANDARD_TYPE -> {
-                val string = editorStandardNoteFragmentEditor.getNoteText()
-                val randomId = Random().nextInt(RANDOM_ID)
 
-                val note = NoteStandard(width, height, colorCard, string,0,0, randomId, NOTES_ELEVATION)
+                val string = editorStandardNoteFragmentEditor.getNoteText()
+                val font = editorStandardNoteFragmentEditor.getFont()
+                val fontSize = editorStandardNoteFragmentEditor.getFontSize()
+
+                val randomId = java.util.Random().nextInt(RANDOM_ID)
+
+                val note = NoteStandard(width, height, colorCard, string,font,fontSize,0,0, randomId, NOTES_ELEVATION)
                 fragmentNoteBook.saveAndCreateDataNotesStandard(note)
                 fragmentNoteBook.constructorFragmentClose()
             }
             ConstType.PAINT_TYPE  ->    {
-                val bitmapURL = editorPaintNoteFragmentEditor.getImageURL()
-                val randomId = Random().nextInt(RANDOM_ID)
+
+                val bitmap = editorPaintNoteFragmentEditor.getImageBitmap()
+                var bitmapURL = ""
+
+                if(bitmap != null) {
+                    bitmapURL = getRandomName()
+                    bitmapToFile(bitmap,bitmapURL)
+                }
+                val randomId = java.util.Random().nextInt(RANDOM_ID)
 
                 val note = NotePaint(width, height, colorCard, bitmapURL,0 ,0, randomId, NOTES_ELEVATION)
                 fragmentNoteBook.saveAndCreateDataNotesPaint(note)
                 fragmentNoteBook.constructorFragmentClose()
             }
             ConstType.FOOD_TYPE  ->    {
-                val stringFoods = editorFoodNoteFragmentEditor.getListFoodsText()
-                val stringWeight = editorFoodNoteFragmentEditor.getListWeightText()
 
-                val listFoods = stringFoods.split("\n")
-                val listWeight = stringWeight.split("\n")
 
-                viewModel.sendServerToCal(listFoods,listWeight)
+
             }
             else -> {}
         }
     }
 
-    private fun createFoodNote(general: String){
-        val stringFoods = editorFoodNoteFragmentEditor.getListFoodsText()
-        val stringWeight = editorFoodNoteFragmentEditor.getListWeightText()
-        val randomId = Random().nextInt(RANDOM_ID)
+    private fun getRandomName() = "image-paint-note-${Random(Const.SEED)}${java.util.Random().nextInt()}.png"
 
-        val note = NoteFood(getWidth(), getHeight(), colorCard, stringFoods, stringWeight, general,0 ,0, randomId, NOTES_ELEVATION)
-        fragmentNoteBook.saveAndCreateDataNotesFoods(note)
-        fragmentNoteBook.constructorFragmentClose()
+    private fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String): File? {
+        var file: File? = null
+        return try {
+            val name = Environment.getExternalStorageDirectory().toString() + File.separator + Environment.DIRECTORY_DCIM + File.separator + fileNameToSave
+
+            file = File(name)
+            file.createNewFile()
+
+            Toast.makeText(requireContext(), getString(R.string.saved_mess) + name, Toast.LENGTH_SHORT).show()
+
+            val bos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos)
+
+            val bitmapData = bos.toByteArray()
+
+            val fos = FileOutputStream(file)
+            fos.write(bitmapData)
+            fos.flush()
+            fos.close()
+
+            file
+        } catch (e: Exception) {
+            e.printStackTrace()
+            file
+        }
     }
 
     companion object {

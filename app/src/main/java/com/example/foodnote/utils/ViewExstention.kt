@@ -1,5 +1,6 @@
 package com.example.foodnote.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -40,5 +41,19 @@ fun View.hide() {
 fun Context.showToast(message: String?, length: Int = Toast.LENGTH_SHORT) {
     message?.let {
         Toast.makeText(this, it, length).show()
+    }
+}
+
+@SuppressLint("ClickableViewAccessibility")
+fun View.setOnTouchAlphaListener(block : (View) -> Unit) {
+    val savedAlpha = this.alpha
+
+    this.setOnTouchListener { v, event ->
+        if (event.action == 0) { v.alpha = 0.2f }
+        if (event.action == 1) {
+            v.alpha = savedAlpha
+            block(v)
+        }
+        true
     }
 }

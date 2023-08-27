@@ -9,7 +9,9 @@ interface CanvasInterface {
     fun setColorBackground(color: Int)
     fun setSize(size: Float)
     fun clearCanvas()
-    fun getBitmap() : Bitmap
+    fun getBitmap() : Bitmap?
     fun setBrush(brush : ConstType)
     fun setPic(flagPic : Boolean)
+    fun backDraw()
+    fun upDraw()
 }

@@ -1,24 +1,21 @@
 package com.example.foodnote.ui.noteBook.mainFragmenNoteBook
 
-import android.Manifest
 import android.animation.ObjectAnimator
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Environment
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.animation.AnticipateOvershootInterpolator
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.animation.doOnEnd
-import androidx.core.app.ActivityCompat
 import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.Fragment
 import com.example.foodnote.R
 import com.example.foodnote.data.databaseRoom.dao.DaoDB
-import com.example.foodnote.databinding.CardFoodsBinding
 import com.example.foodnote.databinding.CardNotesBinding
 import com.example.foodnote.databinding.NotebookFragmentBinding
 import com.example.foodnote.di.DATA_BASE
@@ -31,16 +28,15 @@ import com.example.foodnote.ui.noteBook.constNote.Const.IS_FIRST_RUN
 import com.example.foodnote.ui.noteBook.constNote.Const.MAX_SIZE_TEXT
 import com.example.foodnote.ui.noteBook.constNote.Const.PRESENT_100
 import com.example.foodnote.ui.noteBook.constNote.Const.STACK_CONSTRUCTOR
-import com.example.foodnote.ui.noteBook.constNote.Const.TABLE_FOOD
 import com.example.foodnote.ui.noteBook.constNote.Const.TABLE_PAINT
 import com.example.foodnote.ui.noteBook.constNote.Const.TABLE_STANDARD
 import com.example.foodnote.ui.noteBook.constNote.ConstType
-import com.example.foodnote.ui.noteBook.helperView.ExpandView
 import com.example.foodnote.ui.noteBook.helperView.MovedView
 import com.example.foodnote.ui.noteBook.interfaces.NoteBookFragmentInterface
 import com.example.foodnote.ui.noteBook.modelNotes.*
 import com.example.foodnote.ui.noteBook.stateData.StateDataNotes
 import com.example.foodnote.ui.noteBook.viewModel.ViewModelNotesFragment
+import com.example.foodnote.utils.Permission
 import com.example.foodnote.utils.hide
 import com.example.foodnote.utils.show
 import com.example.foodnote.utils.showToast
@@ -51,13 +47,13 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 import java.io.File
+import java.lang.Exception
 
 class NotesFragment : BaseViewBindingFragment<NotebookFragmentBinding>(NotebookFragmentBinding::inflate) , NoteBookFragmentInterface {
 
     private lateinit var movedView: MovedView
     private var widthScreen = 0
     private var flagBlockChip = true
-    private var flag = true
 
     private val scope = CoroutineScope(Dispatchers.IO)
     private val notesDao: DaoDB by inject(named(DATA_BASE)) { parametersOf(requireActivity()) }
@@ -74,6 +70,31 @@ class NotesFragment : BaseViewBindingFragment<NotebookFragmentBinding>(NotebookF
 
         setWidthPixels()
         checkChip()
+
+        setTypeface()
+    }
+
+    private fun setTypeface() {
+        val typeface = Typeface.createFromAsset(context?.assets, "fonts/poppinssemibold.ttf")
+        binding.textNote.typeface = typeface
+        binding.painNote.typeface = typeface
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        clearPopBackStack();
+    }
+
+    private fun clearPopBackStack() {
+        for (i in 0 until  requireActivity().supportFragmentManager.backStackEntryCount) {
+            requireActivity().supportFragmentManager.clearBackStack("CANVAS_STACK")
+        }
+
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.anim_layout_2, R.anim.anim_layout)
+            .replace(R.id.containerCanvas, Fragment())
+            .commit()
     }
 
     private fun initViewModel() { viewModel.getLiveData().observe(viewLifecycleOwner) { render(it) } }
@@ -95,12 +116,6 @@ class NotesFragment : BaseViewBindingFragment<NotebookFragmentBinding>(NotebookF
                     it.forEach { notePaint -> setDataCreatePaintNote(notePaint) }
                 }
             }
-            is StateDataNotes.SuccessNoteFood -> {
-                binding.progress.hide()
-                stateData.listNote?.let {
-                    it.forEach { noteFood -> setDataCreateFoodNote(noteFood) }
-                }
-            }
             is StateDataNotes.Error ->   {
                 context?.showToast(getString(R.string.network_error_mess))
             }
@@ -117,25 +132,30 @@ class NotesFragment : BaseViewBindingFragment<NotebookFragmentBinding>(NotebookF
         setDataCreateStandardNote(note)
     }
 
-    override fun saveAndCreateDataNotesFoods(note : NoteFood) {
-        viewModel.saveDataNotesFoods(note)
-        setDataCreateFoodNote(note)
-    }
-
     private fun setDataCreateStandardNote(note : NoteStandard) {
         val cardNoteViewBind = CardNotesBinding.inflate(layoutInflater, binding.root, false)
         val cardNoteView = cardNoteViewBind.root
 
         cardNoteView.tag = TABLE_STANDARD
 
-        var size = note.widthCard.toFloat() * CONST_SCALE
-        if (size > MAX_SIZE_TEXT) size = MAX_SIZE_TEXT
+        var size = 18f
+        try { size = note.fontSize.toFloat()
+        } catch (_: Exception) { }
+
+        val fontName = note.font
+        val fontType = if(fontName == "classic") {
+            Typeface.DEFAULT
+        } else {
+            Typeface.createFromAsset(context?.assets, "fonts/${fontName}")
+        }
+
         cardNoteViewBind.textNote.apply {
             text = note.string
             textSize = size
+            typeface = fontType
         }
-        cardNoteViewBind.buttonDelete.setOnClickListener { deleteDialog(cardNoteView) }
 
+        cardNoteViewBind.buttonDelete.setOnClickListener { deleteDialog(cardNoteView) }
         createNote(note,cardNoteView)
     }
 
@@ -148,54 +168,6 @@ class NotesFragment : BaseViewBindingFragment<NotebookFragmentBinding>(NotebookF
         cardNoteViewBind.imageNote.setImageBitmap( BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().toString() + File.separator +  Environment.DIRECTORY_DCIM + File.separator + note.bitmapURL) )
 
         createNote(note,cardNoteView)
-    }
-
-    private fun setDataCreateFoodNote(note: NoteFood) = with(note) {
-        val cardNoteViewBind = CardFoodsBinding.inflate(layoutInflater, binding.root, false)
-        val cardNoteView = cardNoteViewBind.root
-
-        cardNoteView.tag = TABLE_FOOD
-        cardNoteViewBind.apply {
-            buttonDelete.setOnClickListener { deleteDialog(cardNoteView) }
-            searchRecipe.setOnClickListener {
-
-                flag = if (flag) {
-                    movedView.blockMove(false)
-                    ExpandView.expandView(cardNoteView, binding.root)
-                    false
-                } else {
-                    ExpandView.decreaseView(cardNoteView, binding.root)
-                    movedView.blockMove(true)
-                    true
-                }
-            }
-           setTextFoodNote(this,note)
-        }
-        createNote(note,cardNoteView)
-    }
-
-    private fun setTextFoodNote(cardNoteViewBind: CardFoodsBinding,note: NoteFood) = with(note) {
-        cardNoteViewBind.apply {
-            var size = widthCard.toFloat() * CONST_SCALE
-            if (size > MAX_SIZE_TEXT) size = MAX_SIZE_TEXT
-
-            textListFoods.apply {
-                text = stringFoods
-                textSize = size
-            }
-            textListWeight.apply {
-                text = stringWeight
-                textSize = size
-            }
-            textGeneral.apply {
-                text = general
-                textSize = size
-            }
-            textHeader.textSize = size + 2
-            textHeaderGram.textSize = size
-            textGeneral.textSize = size
-            headerGeneral.textSize = size
-        }
     }
 
     private fun createNote(note: Note, cardNoteView: MaterialCardView) = with(note) {
@@ -236,7 +208,6 @@ class NotesFragment : BaseViewBindingFragment<NotebookFragmentBinding>(NotebookF
 
     private fun convertDpToPixels(dp: Int) = (dp * requireContext().resources.displayMetrics.density).toInt()
 
-
     private fun initMovedView() {
         flagBlockChip = true
         movedView = MovedView(ArrayList(),binding.root, viewModel)
@@ -253,7 +224,6 @@ class NotesFragment : BaseViewBindingFragment<NotebookFragmentBinding>(NotebookF
     private fun checkChip() {
         binding.chipStandardNote.setOnClickListener { actionChip(ConstType.STANDARD_TYPE) }
         binding.chipPaintNote.setOnClickListener { actionChip(ConstType.PAINT_TYPE) }
-        binding.chipFoodNote.setOnClickListener  { actionChip(ConstType.FOOD_TYPE) }
     }
 
     private var typeSave : ConstType = ConstType.NULL_TYPE
@@ -321,6 +291,7 @@ class NotesFragment : BaseViewBindingFragment<NotebookFragmentBinding>(NotebookF
     }
 
     private fun setFragmentConstructor(type : ConstType) {
+
         childFragmentManager
             .beginTransaction()
             .replace(R.id.containerConstructor, ConstructorFragment.newInstance(this,type))
@@ -341,18 +312,15 @@ class NotesFragment : BaseViewBindingFragment<NotebookFragmentBinding>(NotebookF
         }
         prefs.edit().putBoolean(IS_FIRST_RUN, false).apply()
     }
-    private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { saveImage() }
-    private fun requestLocationPermissions() = permissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
     private fun saveImage() {
-        if(ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-
-            val bitmap = BitmapFactory.decodeResource(requireContext().resources, R.drawable.image_note_paint)
-
-            val example = ExampleNote(this, requireContext(), widthScreen)
-            example.bitmapToFile(bitmap)
-        } else {
-            requestLocationPermissions()
-        }
+        Permission.sendPermissionForCreateFile({ result ->
+            if(result) {
+                val bitmap = BitmapFactory.decodeResource(requireContext().resources, R.drawable.image_note_paint)
+                val example = ExampleNote(this, requireContext(), widthScreen)
+                example.bitmapToFile(bitmap)
+            }
+        },requireContext(),this)
     }
+
 }

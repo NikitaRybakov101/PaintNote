@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="?attr/backgroundNoteBook"
     android:elevation="100dp">
 
     <TextView
@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/canvas"
         android:textColor="#292929"
-        android:textSize="23sp"
-        app:layout_constraintBottom_toTopOf="@+id/brushPen"
+        android:textSize="36sp"
         app:layout_constraintStart_toStartOf="@+id/cardSeek"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,15 +24,15 @@
         android:layout_marginHorizontal="@dimen/margin_16dp"
         android:layout_marginTop="12dp"
         app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/colorMulti"
-        app:strokeColor="#C5C5C5"
-        app:strokeWidth="1dp">
+        app:layout_constraintTop_toBottomOf="@+id/colorMulti">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginVertical="8dp">
 
             <TextView
                 android:id="@+id/textViewSizeBrash"
@@ -72,7 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="6dp"
-                android:max="240"
+                android:max="120"
                 android:progress="0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -130,6 +129,65 @@
                     android:layout_marginEnd="@dimen/margin_16dp"
                     android:src="@drawable/ic_baseline_more_horiz_24" />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_16dp"
+                    android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/backDraw"
+                    android:layout_width="60dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="bottom|end"
+                    android:backgroundTint="#BDE398"
+                    android:clickable="true"
+                    app:cardCornerRadius="@dimen/margin_16dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:textSize="8sp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="SmallSp" >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.4"
+                        android:rotation="224"
+                        android:rotationY="180"
+                        android:src="@drawable/baseline_subdirectory_arrow_left_24" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/upDraw"
+                    android:layout_width="60dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="bottom|end"
+                    android:backgroundTint="#BDE398"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:textSize="8sp"
+                    app:cardCornerRadius="@dimen/margin_16dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/backDraw"
+                    tools:ignore="SmallSp" >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:rotation="224"
+                        android:rotationY="0"
+                        android:alpha="0.4"
+                        android:src="@drawable/baseline_subdirectory_arrow_left_24"/>
+
+                </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
             </com.google.android.material.card.MaterialCardView>
 
 
@@ -151,30 +209,33 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.chip.Chip
         android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="115dp"
+        android:layout_height="60dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="@dimen/margin_16dp"
         android:backgroundTint="#7992EC"
-        android:text="@string/save_image"
-        android:textSize="12sp"
+        android:text="Save"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="14sp"
         app:cornerRadius="@dimen/margin_16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cancelButton" />
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.chip.Chip
         android:id="@+id/cancelButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="@dimen/margin_16dp"
-        android:backgroundTint="#F3F3F3"
+        android:backgroundTint="#EDEDED"
         android:text="@string/cancel"
+        android:textAlignment="center"
         android:textColor="#707070"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:cornerRadius="@dimen/margin_16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -184,13 +245,12 @@
         android:layout_width="80dp"
         android:layout_height="@dimen/squareColor_24dp"
         android:layout_marginEnd="10dp"
-        android:backgroundTint="#F4F4F4"
+        android:backgroundTint="#EDEDED"
         app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/colorGreen"
         app:layout_constraintEnd_toStartOf="@+id/colorGreen"
-        app:layout_constraintTop_toTopOf="@+id/colorGreen"
-        app:strokeColor="#A6A6A6"
-        app:strokeWidth="1dp">
+        app:layout_constraintTop_toTopOf="@+id/colorGreen">
 
         <TextView
             android:layout_width="wrap_content"
@@ -206,10 +266,11 @@
         android:id="@+id/pic"
         android:layout_width="@dimen/squareColor_24dp"
         android:layout_height="@dimen/squareColor_24dp"
+        android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginEnd="30dp"
         app:cardCornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/colorMulti"
-        app:layout_constraintEnd_toStartOf="@+id/colorMulti"
+        app:layout_constraintStart_toEndOf="@+id/brushCircles"
         app:layout_constraintTop_toTopOf="@+id/colorMulti"
         app:strokeColor="#A6A6A6"
         app:strokeWidth="1dp">
@@ -223,16 +284,6 @@
         </ImageView>
 
     </com.google.android.material.card.MaterialCardView>
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:background="#979797"
-        app:layout_constraintBottom_toBottomOf="@+id/colorMulti"
-        app:layout_constraintEnd_toStartOf="@+id/colorMulti"
-        app:layout_constraintStart_toEndOf="@+id/pic"
-        app:layout_constraintTop_toTopOf="@+id/pic" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/brushCircles"
@@ -363,7 +414,7 @@
         android:id="@+id/colorBlue"
         android:layout_width="@dimen/squareColor_24dp"
         android:layout_height="@dimen/squareColor_24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="#80D4FF"
         app:cardCornerRadius="0dp"
@@ -392,12 +443,11 @@
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="4dp"
         android:elevation="8dp"
-        app:cardCornerRadius="0dp"
+        app:cardCornerRadius="@dimen/margin_16dp"
+        app:cardElevation="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/pic"
         app:layout_constraintTop_toBottomOf="@+id/colorMulti"
-        app:strokeColor="#4C4C4C"
-        app:strokeWidth="1dp"
         tools:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -422,9 +472,7 @@
                 app:cardCornerRadius="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/palette"
-                app:strokeColor="#A5A5A5"
-                app:strokeWidth="1dp">
+                app:layout_constraintTop_toBottomOf="@+id/palette">
 
                 <TextView
                     android:layout_width="match_parent"

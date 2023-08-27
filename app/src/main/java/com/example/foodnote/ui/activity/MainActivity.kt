@@ -18,25 +18,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        initNavigation()
     }
 
-    private fun initNavigation() {
-        val navView = binding.bottomNavigation
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.container_root) as NavHostFragment
-        val navController = navHostFragment.navController
-
-        navView.setupWithNavController(navController)
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.splashScreenFragment -> {
-                    binding.bottomNavigation.hide()
-                }
-                else -> binding.bottomNavigation.show()
-            }
-        }
-    }
-
+    override fun onBackPressed() { }
 }
 

@@ -37,7 +37,7 @@ class ColorPic @JvmOverloads constructor(context : Context, attrs : AttributeSet
     private var targetX = 0f
     private var targetY = 0f
 
-    private val scale = 10
+    private val scale = 100
     private var colorH = 360f
 
     private val radiusCircles = 8f

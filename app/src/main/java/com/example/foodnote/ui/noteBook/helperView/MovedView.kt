@@ -111,10 +111,10 @@ class MovedView(private val listView : ArrayList<View>, root : ConstraintLayout,
     private fun animElevationUp(view: View) {
         scope.launch {
             var elevation = view.elevation
-            val speed = 6f
+            val speed = 4f
 
             while (startAnim) {
-                Thread.sleep(10)
+                Thread.sleep(8)
                 withContext(Dispatchers.Main){
                     view.elevation = elevation
                 }
@@ -130,10 +130,10 @@ class MovedView(private val listView : ArrayList<View>, root : ConstraintLayout,
     private fun animElevationDown(view: View) {
         scope.launch {
             var elevation = view.elevation
-            val speed = -6f
+            val speed = -4f
 
             while (startAnim) {
-                Thread.sleep(10)
+                Thread.sleep(8)
                 withContext(Dispatchers.Main){
                     view.elevation = elevation
                 }
